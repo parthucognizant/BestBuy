@@ -25,7 +25,7 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:text="View Products"
+        android:text="@string/screen_one_Button_view_products"
         tools:layout_constraintBottom_creator="1"
         android:layout_marginStart="5dp"
         app:layout_constraintBottom_toBottomOf="parent"

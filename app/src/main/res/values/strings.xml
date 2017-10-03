@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BestBuy</string>
+    <string name="screen_one_Button_view_products">View Products</string>
 </resources>
