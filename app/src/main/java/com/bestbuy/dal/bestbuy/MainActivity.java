@@ -18,7 +18,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewProducts.setOnClickListener(this);
     }
     String[] values = new String[]{"Android", "iPhone", "WindowsMobile",
-            "Blackberry", "WebOS", "Ubuntu"};
+            "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
+            "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
+            "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
+            "Android", "iPhone", "WindowsMobile"};
 
     @Override
     public void onClick(View view) {
