@@ -43,9 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        /*Intent MainIntent = new Intent(MainActivity.this, ProductActivity.class);
-        MainIntent.putExtra("stringCollection", values);
-        startActivity(MainIntent);*/
         viewProducts.setClickable(false);
         new LongRunningGetIO().execute();
     }
