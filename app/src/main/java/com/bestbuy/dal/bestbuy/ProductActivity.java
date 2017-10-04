@@ -19,6 +19,8 @@ import java.util.List;
 public class ProductActivity extends AppCompatActivity {
 
 
+    ArrayList<HashMap<String, String>> mCategoryListValues = new ArrayList<HashMap<String, String>>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,17 +29,17 @@ public class ProductActivity extends AppCompatActivity {
         final ListView ProductList = (ListView) findViewById(R.id.productList);
 
         Intent intent = getIntent();
-        ArrayList<HashMap<String, String>> mCategoryListValues = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("categoryCollection");
+        mCategoryListValues = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("categoryCollection");
 
-        final ArrayList<String> mCategoryDisplyListlist = new ArrayList<String>();
+        final ArrayList<String> mCategoryDisplayList = new ArrayList<String>();
         for(HashMap<String, String> map : mCategoryListValues)
         {
             String tagName = map.get("name");
-            mCategoryDisplyListlist.add(tagName);
+            mCategoryDisplayList.add(tagName);
         }
 
         final ArrayAdapter adapter = new ArrayAdapter(this,
-                android.R.layout.simple_list_item_1, mCategoryDisplyListlist);
+                android.R.layout.simple_list_item_1, mCategoryDisplayList);
         ProductList.setAdapter(adapter);
 
         ProductList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -46,7 +48,9 @@ public class ProductActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
                 String text = (String) ProductList.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), text + " - " + position, Toast.LENGTH_SHORT).show();
+                HashMap<String, String> categoryID = mCategoryListValues.get(position);
+                String catid = categoryID.get("id");
+                Toast.makeText(getApplicationContext(), text + " - " + catid, Toast.LENGTH_SHORT).show();
 
             }
 
