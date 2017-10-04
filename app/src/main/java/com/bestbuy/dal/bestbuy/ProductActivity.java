@@ -1,6 +1,7 @@
 package com.bestbuy.dal.bestbuy;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,14 +27,17 @@ public class ProductActivity extends AppCompatActivity {
         final ListView ProductList = (ListView) findViewById(R.id.productList);
 
         Intent intent = getIntent();
-        String[] values = intent.getStringArrayExtra("stringCollection");
+        ArrayList<HashMap<String, String>> mCategoryListValues = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("categoryCollection");
 
-        final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            list.add(values[i]);
+        final ArrayList<String> mCategoryDisplyListlist = new ArrayList<String>();
+        for(HashMap<String, String> map : mCategoryListValues)
+        {
+            String tagName = map.get("name");
+            mCategoryDisplyListlist.add(tagName);
         }
+
         final ArrayAdapter adapter = new ArrayAdapter(this,
-                android.R.layout.simple_list_item_1, list);
+                android.R.layout.simple_list_item_1, mCategoryDisplyListlist);
         ProductList.setAdapter(adapter);
 
         ProductList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
