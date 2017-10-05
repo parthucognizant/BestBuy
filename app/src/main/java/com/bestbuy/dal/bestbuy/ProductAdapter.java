@@ -3,6 +3,8 @@ package com.bestbuy.dal.bestbuy;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,6 +15,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +88,8 @@ public class ProductAdapter extends BaseAdapter {
         ProductModel productModelValues = (ProductModel) getItem(position);
 
         //adding values to the list item
-        holder.imageView.setImageResource(productModelValues.getProductImage());
+        Picasso.with(context).load(productModelValues.getProductImage()).into(holder.imageView);
+        //holder.imageView.setImageResource(productModelValues.getProductImage());
         holder.textViewProductName.setText(productModelValues.getProductName());
         holder.textViewProductPrice.setText(productModelValues.getProductPrice());
 

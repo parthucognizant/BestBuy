@@ -5,9 +5,9 @@ public class ProductModel {
 
     String productName;
     String productPrice;
-    int productImage;
+    String productImage;
 
-    public ProductModel(int productImage,String productName,String productPrice){
+    public ProductModel(String productImage,String productName,String productPrice){
         this.productImage = productImage;
         this.productName = productName;
         this.productPrice = productPrice;
@@ -29,11 +29,11 @@ public class ProductModel {
         this.productPrice = productPrice;
     }
 
-    public int getProductImage(){
+    public String getProductImage(){
         return productImage;
     }
 
-    public void setProductImage(int productImage) {
+    public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
 }

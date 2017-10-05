@@ -19,8 +19,10 @@ public class ProductlistActivity extends AppCompatActivity {
     public static final String[] price = new String[] {
             "$340", "$520", "$900", "$100" };
 
-    public static final Integer[] images = { R.drawable.tv,
-            R.drawable.tv, R.drawable.tv, R.drawable.tv };
+    public static final String[] images = { "https://img.bbystatic.com/BestBuy_US/images/products/1014/1014974_sa.jpg",
+            "https://img.bbystatic.com/BestBuy_US/images/products/1027/1027095_sa.jpg",
+            "https://img.bbystatic.com/BestBuy_US/images/products/1027/1027599_sa.jpg",
+            "https://img.bbystatic.com/BestBuy_US/images/products/1027/1027714_sa.jpg" };
 
     List<ProductModel> productListValues;
 
