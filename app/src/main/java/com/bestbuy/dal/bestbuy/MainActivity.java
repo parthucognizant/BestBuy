@@ -110,6 +110,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (pDialog.isShowing())
                 pDialog.dismiss();
             if (results != null) {
+                if(!categories.isEmpty()){
+                    categories.clear();
+                }
                 ArrayList<HashMap<String, String>> mCategories = parseJson(results);
                 //Toast.makeText(getApplicationContext(), mCategories.toString(), Toast.LENGTH_SHORT).show();
                 viewProducts.setClickable(true);
