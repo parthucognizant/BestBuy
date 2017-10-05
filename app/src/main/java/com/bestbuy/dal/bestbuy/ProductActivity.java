@@ -51,6 +51,8 @@ public class ProductActivity extends AppCompatActivity {
                 HashMap<String, String> categoryID = mCategoryListValues.get(position);
                 String catid = categoryID.get("id");
                 Toast.makeText(getApplicationContext(), text + " - " + catid, Toast.LENGTH_SHORT).show();
+                Intent productIntent = new Intent(ProductActivity.this, ProductlistActivity.class);
+                startActivity(productIntent);
 
             }
 
