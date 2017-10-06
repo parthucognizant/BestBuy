@@ -12,18 +12,6 @@ public class ProductlistActivity extends AppCompatActivity {
 
     ListView productList;
 
-    public static final String[] names = new String[] { "Elite Screens - Spectrum Electric Projection Screen - White",
-            "APC - AV J-Type 1kVA Power Conditioner / UPS Battery Backup Device - Black", "Niles - Remote Control Anywhere! Kit",
-            "Bell'O - Triple Play TV Stand for Flat-Panel TVs Up to 46\\\" - Cherry" };
-
-    public static final String[] price = new String[] {
-            "$340", "$520", "$900", "$100" };
-
-    public static final String[] images = { "https://img.bbystatic.com/BestBuy_US/images/products/1014/1014974_sa.jpg",
-            "https://img.bbystatic.com/BestBuy_US/images/products/1027/1027095_sa.jpg",
-            "https://img.bbystatic.com/BestBuy_US/images/products/1027/1027599_sa.jpg",
-            "https://img.bbystatic.com/BestBuy_US/images/products/1027/1027714_sa.jpg" };
-
     List<ProductModel> productListValues;
 
     @Override
@@ -31,11 +19,7 @@ public class ProductlistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productlist);
 
-        productListValues = new ArrayList<ProductModel>();
-        for (int i = 0; i < names.length; i++) {
-            ProductModel item = new ProductModel(images[i], names[i], price[i]);
-            productListValues.add(item);
-        }
+        productListValues = DataManager.getInstance().products;
 
         productList = (ListView)findViewById(R.id.productList);
         ProductAdapter mProductAdapter = new ProductAdapter(this,productListValues);

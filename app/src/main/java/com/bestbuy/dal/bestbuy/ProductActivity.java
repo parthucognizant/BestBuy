@@ -20,6 +20,8 @@ import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.StringRequestListener;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,7 +84,13 @@ public class ProductActivity extends AppCompatActivity {
                 .getAsString(new StringRequestListener() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), "Success::"+response, Toast.LENGTH_SHORT).show();
+                        DataManager.getInstance().products = parseJson(response);
+                        if(DataManager.getInstance().products.size() == 0){
+                            Toast.makeText(getApplicationContext(), "No Products Found", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Intent productIntent = new Intent(ProductActivity.this, ProductlistActivity.class);
+                            startActivity(productIntent);
+                        }
                     }
 
                     @Override
@@ -91,6 +99,45 @@ public class ProductActivity extends AppCompatActivity {
                         Log.e("Data", anError.toString(), anError);
                     }
                 });
+    }
+
+    public ArrayList parseJson(String data) {
+        ArrayList<ProductModel> products = new ArrayList<>();
+        if (data != null) {
+            try {
+                JSONObject jsonObj = new JSONObject(data);
+
+                // Getting JSON Array node
+                JSONArray mCatecogiesList = jsonObj.getJSONArray("products");
+
+                // looping through All Categories
+                for (int i = 0; i < mCatecogiesList.length(); i++) {
+                    JSONObject c = mCatecogiesList.getJSONObject(i);
+
+                    String id = c.getString("regularPrice");
+                    String name = c.getString("name");
+                    String image = c.getString("image");
+
+                    ProductModel product = new ProductModel(image,name, id);
+
+
+                    // adding Categories to Categories list
+                    products.add(product);
+                }
+            } catch (final JSONException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Json parsing error: " + e.getMessage(),
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+
+            }
+        }
+        return products;
     }
 
 }
