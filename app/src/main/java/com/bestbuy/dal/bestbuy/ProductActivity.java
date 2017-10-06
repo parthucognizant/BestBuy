@@ -1,8 +1,11 @@
 package com.bestbuy.dal.bestbuy;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +19,6 @@ import android.widget.Toast;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.StringRequestListener;
 
 import org.json.JSONArray;
@@ -26,7 +28,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 import okhttp3.OkHttpClient;
 
 public class ProductActivity extends AppCompatActivity {
@@ -34,6 +35,8 @@ public class ProductActivity extends AppCompatActivity {
 
     ArrayList<HashMap<String, String>> mCategoryListValues = new ArrayList<HashMap<String, String>>();
     String productURL = "";
+    private CoordinatorLayout coordinatorLayout;
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
 
         final ListView ProductList = (ListView) findViewById(R.id.productList);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
         Intent intent = getIntent();
         mCategoryListValues = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("categoryCollection");
@@ -65,9 +69,6 @@ public class ProductActivity extends AppCompatActivity {
                 String catid = categoryID.get("id");
                 productURL = "http://api.remix.bestbuy.com/v1/products(categoryPath.id="+catid+")?format=json&show=productId,name,regularPrice,image&apiKey=3amgbj6kp9wfage4ka2k2f44";
                 getProductList(productURL);
-                //Toast.makeText(getApplicationContext(), text + " - " + catid, Toast.LENGTH_SHORT).show();
-                //Intent productIntent = new Intent(ProductActivity.this, ProductlistActivity.class);
-                //startActivity(productIntent);
 
             }
 
@@ -75,6 +76,10 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     public void getProductList(String URL) {
+        pDialog = new ProgressDialog(ProductActivity.this);
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(false);
+        pDialog.show();
         OkHttpClient okHttpClient = new OkHttpClient() .newBuilder()
                 .build();
         AndroidNetworking.initialize(getApplicationContext(),okHttpClient);
@@ -84,9 +89,18 @@ public class ProductActivity extends AppCompatActivity {
                 .getAsString(new StringRequestListener() {
                     @Override
                     public void onResponse(String response) {
+                        if (pDialog.isShowing())
+                            pDialog.dismiss();
                         DataManager.getInstance().products = parseJson(response);
                         if(DataManager.getInstance().products.size() == 0){
-                            Toast.makeText(getApplicationContext(), "No Products Found", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "No Products Found", Toast.LENGTH_SHORT).show();
+                            Snackbar mSnackbar = Snackbar
+                                    .make(coordinatorLayout, "Products not found", Snackbar.LENGTH_LONG);
+                            mSnackbar.getView().setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            TextView snackTextView = (TextView) (mSnackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
+                            snackTextView.setTextColor(Color.WHITE);
+                            snackTextView.setTextSize( 20 );
+                            mSnackbar.show();
                         }else{
                             Intent productIntent = new Intent(ProductActivity.this, ProductlistActivity.class);
                             startActivity(productIntent);
@@ -95,6 +109,8 @@ public class ProductActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(ANError anError) {
+                        if (pDialog.isShowing())
+                            pDialog.dismiss();
                         Toast.makeText(getApplicationContext(), anError.toString(), Toast.LENGTH_SHORT).show();
                         Log.e("Data", anError.toString(), anError);
                     }

@@ -20,8 +20,9 @@
         </activity>
         <activity
             android:name=".ProductActivity"
-            android:label="Products" />
-        <activity android:name=".ProductlistActivity"></activity>
+            android:label="Categories" />
+        <activity android:name=".ProductlistActivity"
+            android:label="Products"></activity>
     </application>
 
 </manifest>
