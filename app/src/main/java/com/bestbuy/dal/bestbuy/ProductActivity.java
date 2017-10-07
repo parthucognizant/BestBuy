@@ -67,7 +67,7 @@ public class ProductActivity extends AppCompatActivity {
                 String text = (String) ProductList.getItemAtPosition(position);
                 HashMap<String, String> categoryID = mCategoryListValues.get(position);
                 String catid = categoryID.get("id");
-                productURL = "http://api.remix.bestbuy.com/v1/products(categoryPath.id="+catid+")?format=json&show=productId,name,regularPrice,image&apiKey=3amgbj6kp9wfage4ka2k2f44";
+                productURL = "http://api.remix.bestbuy.com/v1/products(categoryPath.id="+catid+")?format=json&show=sku,name,regularPrice,image&apiKey=3amgbj6kp9wfage4ka2k2f44";
                 getProductList(productURL);
 
             }
@@ -95,7 +95,7 @@ public class ProductActivity extends AppCompatActivity {
                         if(DataManager.getInstance().products.size() == 0){
                             //Toast.makeText(getApplicationContext(), "No Products Found", Toast.LENGTH_SHORT).show();
                             Snackbar mSnackbar = Snackbar
-                                    .make(coordinatorLayout, "Products not found", Snackbar.LENGTH_LONG);
+                                    .make(coordinatorLayout, R.string.product_error_info, Snackbar.LENGTH_LONG);
                             mSnackbar.getView().setBackgroundColor(getResources().getColor(R.color.colorAccent));
                             TextView snackTextView = (TextView) (mSnackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
                             snackTextView.setTextColor(Color.WHITE);
@@ -133,8 +133,9 @@ public class ProductActivity extends AppCompatActivity {
                     String price = "$"+c.getString("regularPrice");
                     String name = c.getString("name");
                     String image = c.getString("image");
+                    String sku = c.getString("sku");
 
-                    ProductModel product = new ProductModel(image,name, price);
+                    ProductModel product = new ProductModel(image,name, price,sku);
 
 
                     // adding Categories to Categories list

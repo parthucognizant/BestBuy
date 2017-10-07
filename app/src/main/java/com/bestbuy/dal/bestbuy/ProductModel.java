@@ -6,8 +6,9 @@ public class ProductModel {
     String productName;
     String productPrice;
     String productImage;
+    String productSKU;
 
-    public ProductModel(String productImage,String productName,String productPrice){
+    public ProductModel(String productImage,String productName,String productPrice, String productSKU){
         this.productImage = productImage;
         this.productName = productName;
         this.productPrice = productPrice;
@@ -35,5 +36,13 @@ public class ProductModel {
 
     public void setProductImage(String productImage) {
         this.productImage = productImage;
+    }
+
+    public String getProductSKU() {
+        return productSKU;
+    }
+
+    public void setProductSKU(String productSKU) {
+        this.productSKU = productSKU;
     }
 }
