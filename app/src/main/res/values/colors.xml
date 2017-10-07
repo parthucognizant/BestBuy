@@ -3,6 +3,6 @@
     <color name="colorPrimary">#003B64</color>
     <color name="colorPrimaryDark">#002C4B</color>
     <color name="colorAccent">#003B64</color>
-    <color name="year">#999999</color>
-    <color name="title">#222222</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
 </resources>

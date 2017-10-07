@@ -1,83 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_coordinator"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.bestbuy.dal.bestbuy.MainActivity">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/bbLogo"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/relative1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="15dp">
+
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="5dp"
+            android:layout_toLeftOf="@+id/searchButton"
+            android:background="@drawable/bg_search"
+            android:drawableLeft="@android:drawable/ic_menu_search"
+            android:drawablePadding="15dp"
+            android:hint="Search Best Buy"
+            android:padding="5dp"></EditText>
+
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="5dp"
+            android:text="Best Go!"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="25dp"></Button>
+
+        <Button
+            android:id="@+id/btnProducts"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignLeft="@+id/search"
+            android:layout_alignStart="@+id/search"
+            android:layout_below="@+id/search"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/button_style"
+            android:drawableLeft="@android:drawable/ic_menu_help"
+            android:text="Products"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_text_color"
+            android:paddingRight="30dp"
+            android:textSize="25dp" />
+
+        <Button
+        android:id="@+id/btnStores"
+        android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        app:srcCompat="@drawable/bb"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="25dp"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="8dp" />
+        android:layout_below="@+id/btnProducts"
+        android:layout_margin="25dp"
+        android:background="@drawable/button_style"
+        android:drawableLeft="@android:drawable/ic_menu_compass"
+        android:text="Stores"
+        android:textAllCaps="false"
+        android:textColor="@drawable/button_text_color"
+        android:paddingRight="30dp"
+        android:textSize="25dp" />
 
-    <Button
-        android:id="@+id/getStarted"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="0dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_height="60dp"
-        android:text="@string/screen_one_Button_view_products"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="326dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        android:layout_marginEnd="8dp" />
+        <Button
+            android:id="@+id/btnProfile"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/btnStores"
+            android:layout_margin="25dp"
+            android:background="@drawable/button_style"
+            android:drawableLeft="@android:drawable/ic_menu_view"
+            android:text="Profile"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_text_color"
+            android:paddingRight="30dp"
+            android:textSize="25dp" />
 
-    <Button
-        android:id="@+id/getProfile"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="0dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_height="60dp"
-        android:text="@string/screen_one_Button_view_profile"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="226dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        android:layout_marginEnd="8dp" />
 
-    <Button
-        android:id="@+id/getStores"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="0dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_height="60dp"
-        android:text="@string/screen_one_Button_view_stores"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="121dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        android:layout_marginEnd="8dp" />
-</android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

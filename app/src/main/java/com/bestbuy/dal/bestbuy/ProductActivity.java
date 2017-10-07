@@ -130,11 +130,11 @@ public class ProductActivity extends AppCompatActivity {
                 for (int i = 0; i < mCatecogiesList.length(); i++) {
                     JSONObject c = mCatecogiesList.getJSONObject(i);
 
-                    String id = c.getString("regularPrice");
+                    String price = c.getString("regularPrice");
                     String name = c.getString("name");
                     String image = c.getString("image");
 
-                    ProductModel product = new ProductModel(image,name, id);
+                    ProductModel product = new ProductModel(image,name, price);
 
 
                     // adding Categories to Categories list
