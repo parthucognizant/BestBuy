@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 for (int i = 0; i < mCatecogiesList.length(); i++) {
                     JSONObject c = mCatecogiesList.getJSONObject(i);
 
-                    String price = c.getString("regularPrice");
+                    String price = "$"+c.getString("regularPrice");
                     String name = c.getString("name");
                     String image = c.getString("image");
 
