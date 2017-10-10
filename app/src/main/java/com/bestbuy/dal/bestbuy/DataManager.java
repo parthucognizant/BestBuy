@@ -11,6 +11,7 @@ public class DataManager {
     }
 
     public ArrayList<ProductModel> products;
+    public ArrayList<StoreModel> stores;
     private DataManager() {
     }
 }

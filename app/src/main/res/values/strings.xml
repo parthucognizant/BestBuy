@@ -4,4 +4,5 @@
     <string name="screen_one_Button_view_profile">Profile</string>
     <string name="screen_one_Button_view_stores">Stores</string>
     <string name="product_error_info">No Products Found!</string>
+    <string name="google_maps_key">AIzaSyAlYtIRba9cQZvSVOpgLP-se584-0JHZxM</string>
 </resources>

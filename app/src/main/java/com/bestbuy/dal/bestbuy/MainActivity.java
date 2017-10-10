@@ -1,15 +1,15 @@
 package com.bestbuy.dal.bestbuy;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.EditText;
@@ -21,33 +21,23 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.StringRequestListener;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import okhttp3.OkHttpClient;
 
-import static com.bestbuy.dal.bestbuy.R.id.coordinatorLayout;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button viewProducts;
-    Button searchProducts;
+    Button searchProducts, viewStores;
     EditText searchText;
     ArrayList<HashMap<String, String>> categories = new ArrayList<HashMap<String, String>>();
     private ProgressDialog pDialog;
+
 
     String categoryURL = "http://api.remix.bestbuy.com/v1/categories?format=json&show=id,name&apiKey=3amgbj6kp9wfage4ka2k2f44";
     String searchURL = "https://api.bestbuy.com/v1/products(search={item})?format=json&show=sku,name,regularPrice,image&apiKey=3amgbj6kp9wfage4ka2k2f44";
@@ -66,15 +56,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchText = (EditText) findViewById(R.id.search);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.search_coordinator);
 
-        searchProducts =(Button) findViewById(R.id.searchButton);
+
+        searchProducts = (Button) findViewById(R.id.searchButton);
         searchProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 searchString = searchText.getText().toString();
-                if(!searchString.isEmpty())
+                if (!searchString.isEmpty()) {
+                    InputMethodManager keyboardManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    keyboardManager.hideSoftInputFromWindow(searchText.getWindowToken(), 0);
                     getProductList(searchURL);
-                else
+                } else {
                     searchText.setError("Please enter search keyword");
+                }
+            }
+        });
+
+        viewStores = (Button) findViewById(R.id.btnStores);
+        viewStores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent MapIntent = new Intent(MainActivity.this, StoreActivity.class);
+                startActivity(MapIntent);
             }
         });
     }
@@ -92,7 +95,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 // Getting JSON Array node
                 JSONArray mCatecogiesList = jsonObj.getJSONArray("categories");
-
+                if(!categories.isEmpty()){
+                    categories.clear();
+                }
                 // looping through All Categories
                 for (int i = 0; i < mCatecogiesList.length(); i++) {
                     JSONObject c = mCatecogiesList.getJSONObject(i);
@@ -131,9 +136,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
         pDialog.show();
-        OkHttpClient okHttpClient = new OkHttpClient() .newBuilder()
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .build();
-        AndroidNetworking.initialize(getApplicationContext(),okHttpClient);
+        AndroidNetworking.initialize(getApplicationContext(), okHttpClient);
         AndroidNetworking.get(URL)
                 .setPriority(Priority.IMMEDIATE)
                 .build()
@@ -166,9 +171,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
         pDialog.show();
-        OkHttpClient okHttpClient = new OkHttpClient() .newBuilder()
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .build();
-        AndroidNetworking.initialize(getApplicationContext(),okHttpClient);
+        AndroidNetworking.initialize(getApplicationContext(), okHttpClient);
         AndroidNetworking.get(URL)
                 .addPathParameter("item", searchString)
                 .setPriority(Priority.IMMEDIATE)
@@ -180,16 +185,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             pDialog.dismiss();
                         ProductActivity pa = new ProductActivity();
                         DataManager.getInstance().products = pa.parseJson(response);
-                        if(DataManager.getInstance().products.size() == 0){
+                        if (DataManager.getInstance().products.size() == 0) {
                             //Toast.makeText(getApplicationContext(), "No Products", Toast.LENGTH_SHORT).show();
                             Snackbar mSnackbar = Snackbar
                                     .make(coordinatorLayout, R.string.product_error_info, Snackbar.LENGTH_LONG);
                             mSnackbar.getView().setBackgroundColor(getResources().getColor(R.color.colorAccent));
                             TextView snackTextView = (TextView) (mSnackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
                             snackTextView.setTextColor(Color.WHITE);
-                            snackTextView.setTextSize( 20 );
+                            snackTextView.setTextSize(20);
                             mSnackbar.show();
-                        }else{
+                        } else {
                             Intent productIntent = new Intent(MainActivity.this, ProductlistActivity.class);
                             startActivity(productIntent);
                         }
