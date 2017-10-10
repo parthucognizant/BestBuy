@@ -185,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             pDialog.dismiss();
                         ProductActivity pa = new ProductActivity();
                         DataManager.getInstance().products = pa.parseJson(response);
+                        searchText.setText("");
                         if (DataManager.getInstance().products.size() == 0) {
                             //Toast.makeText(getApplicationContext(), "No Products", Toast.LENGTH_SHORT).show();
                             Snackbar mSnackbar = Snackbar

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +24,8 @@ public class ProductAdapter extends BaseAdapter {
     //activity context
     Context context;
 
+    Animation scaleUp;
+
 
 
     //constructor initializing the values
@@ -29,6 +33,7 @@ public class ProductAdapter extends BaseAdapter {
         super();
         this.context = context;
         this.productList = productList;
+        scaleUp = AnimationUtils.loadAnimation(context, R.anim.scale_up_fast);
     }
 
     @Override
@@ -74,12 +79,13 @@ public class ProductAdapter extends BaseAdapter {
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
+            convertView.startAnimation(scaleUp);
         }
 
         ProductModel productModelValues = (ProductModel) getItem(position);
 
         //adding values to the list item
-        Picasso.with(context).load(productModelValues.getProductImage()).into(holder.imageView);
+        Picasso.with(context).load(productModelValues.getProductImage()).placeholder(R.drawable.loading).into(holder.imageView);
         //holder.imageView.setImageResource(productModelValues.getProductImage());
         holder.textViewProductName.setText(productModelValues.getProductName());
         holder.textViewProductPrice.setText(productModelValues.getProductPrice());
