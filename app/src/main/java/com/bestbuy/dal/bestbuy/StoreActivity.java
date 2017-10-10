@@ -122,6 +122,7 @@ public class StoreActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         if (pDialog.isShowing())
                             pDialog.dismiss();
+                        editPostal.setText("");
                         parseJson(response);
                     }
 
@@ -175,6 +176,9 @@ public class StoreActivity extends AppCompatActivity {
                     CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
                     googleMap.animateCamera(cu);
                 } else {
+                    if (googleMap != null) {
+                        googleMap.clear();
+                    }
                     Snackbar mSnackbar = Snackbar
                             .make(coordinatorLayout, "No Stores", Snackbar.LENGTH_LONG);
                     mSnackbar.getView().setBackgroundColor(getResources().getColor(R.color.colorAccent));

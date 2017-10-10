@@ -66,7 +66,7 @@ public class ProductActivity extends AppCompatActivity {
                 String text = (String) ProductList.getItemAtPosition(position);
                 HashMap<String, String> categoryID = mCategoryListValues.get(position);
                 String catid = categoryID.get("id");
-                productURL = "http://api.remix.bestbuy.com/v1/products(categoryPath.id="+catid+")?format=json&show=sku,name,regularPrice,image&apiKey=3amgbj6kp9wfage4ka2k2f44";
+                productURL = "http://api.remix.bestbuy.com/v1/products(categoryPath.id="+catid+")?format=json&show=sku,name,regularPrice,image&pageSize=30&apiKey=3amgbj6kp9wfage4ka2k2f44";
                 getProductList(productURL);
 
             }

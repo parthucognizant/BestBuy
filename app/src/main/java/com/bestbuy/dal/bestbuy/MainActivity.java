@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     String categoryURL = "http://api.remix.bestbuy.com/v1/categories?format=json&show=id,name&apiKey=3amgbj6kp9wfage4ka2k2f44";
-    String searchURL = "https://api.bestbuy.com/v1/products(search={item})?format=json&show=sku,name,regularPrice,image&apiKey=3amgbj6kp9wfage4ka2k2f44";
+    String searchURL = "https://api.bestbuy.com/v1/products(search={item})?format=json&show=sku,name,regularPrice,image&pageSize=100&apiKey=3amgbj6kp9wfage4ka2k2f44";
     String searchString = "";
     private CoordinatorLayout coordinatorLayout;
 
