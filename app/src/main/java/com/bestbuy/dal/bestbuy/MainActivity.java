@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             snackTextView.setTextSize(20);
                             mSnackbar.show();
                         } else {
-                            Intent productIntent = new Intent(MainActivity.this, ProductlistActivity.class);
+                            Intent productIntent = new Intent(MainActivity.this, listActivity.class);
                             startActivity(productIntent);
                         }
                     }

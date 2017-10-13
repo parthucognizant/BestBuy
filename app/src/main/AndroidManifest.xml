@@ -25,7 +25,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="com.bestbuy.dal.bestbuy.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,13 +33,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.bestbuy.dal.bestbuy.ProductActivity"
+            android:name=".ProductActivity"
             android:label="Categories" />
         <activity
-            android:name="com.bestbuy.dal.bestbuy.ProductlistActivity"
+            android:name=".ProductlistActivity"
             android:label="Products" />
-        <activity android:name="com.bestbuy.dal.bestbuy.StoreActivity"
-            android:label="Stores"></activity>
+        <activity
+            android:name=".StoreActivity"
+            android:label="Stores" />
+        <activity
+            android:name=".ProductlistCard_Activity"
+            android:label="@string/title_activity_productlist_card_"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".listActivity"></activity>
     </application>
 
 </manifest>

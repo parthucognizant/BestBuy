@@ -5,4 +5,6 @@
     <string name="screen_one_Button_view_stores">Stores</string>
     <string name="product_error_info">No Products Found!</string>
     <string name="google_maps_key">AIzaSyAlYtIRba9cQZvSVOpgLP-se584-0JHZxM</string>
+    <string name="title_activity_productist_card">productistCardActivity</string>
+    <string name="title_activity_productlist_card_">ProductlistCard_Activity</string>
 </resources>
