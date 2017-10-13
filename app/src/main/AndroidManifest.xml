@@ -45,7 +45,8 @@
             android:name=".ProductlistCard_Activity"
             android:label="@string/title_activity_productlist_card_"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".listActivity"></activity>
+        <activity android:name=".listActivity"
+            android:label="Products"></activity>
     </application>
 
 </manifest>
